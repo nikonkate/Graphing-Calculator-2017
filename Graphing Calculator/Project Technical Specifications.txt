@@ -1,0 +1,6 @@
+----------------------------------------------------------------------------------
+-- Project was builded and tested under Windows 10 64-bit operation system.
+-- For the entire project JDK 8 and JRE 8 were used.
+----------------------------------------------------------------------------------
+-- The project requires JDK 8 and JRE 8 to be installed on the machine.
+----------------------------------------------------------------------------------

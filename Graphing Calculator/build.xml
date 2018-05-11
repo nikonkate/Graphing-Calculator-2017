@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Graphing Calculator.makejar" default="run" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	
+	<property name="main-class"     value="calculator.Main"/>
+	<property environment="env"/>
+	
+	<path id="classpath">
+	        <fileset dir="build">
+	            <include name="*.jar" />
+	        </fileset>
+	</path>
+
+	
+	<target name="clean">
+		<delete dir="build"/>
+	</target>
+ 
+	<target name="compile" depends="clean">
+	  	<mkdir dir="build"/>
+	  		<javac includeantruntime="false" srcdir="src" destdir="build" fork="yes"/>
+	  		
+	</target>
+
+	<target name="incopy">
+		<copyfile src="src/calculator/view/CalculatorLayout.fxml" dest="build/calculator/view/CalculatorLayout.fxml"/>
+	</target>
+	
+	<target name="build" depends="compile,incopy">
+	  	
+	 <taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath="${env.JAVA_HOME}/lib/ant-javafx.jar"/>
+	  	  
+	      <fx:application id="GraphingCalculatorID" name="Graphing Calculator" mainClass="calculator.Main"/>
+
+	      <fx:resources id="appRes">
+	        <fx:fileset dir="build" includes="Graphing Calculator.jar"/>
+	      </fx:resources>
+	 
+	      <fx:jar destfile="build/Graphing Calculator">
+	        <fx:application refid="GraphingCalculatorID"/>
+	        <fx:resources refid="appRes"/>
+	        <fileset dir="build"/>
+	      </fx:jar>
+	 
+	 </target>
+	
+	<target name="run" depends="build">
+	        <java jar="build/Graphing Calculator.jar" fork="true"/>
+	</target>
+	
+	<target name="javadocs" description="Generate JavaDoc API docs">
+	        <delete dir="javadocs" failonerror="false" />
+	        <mkdir dir="javadocs" />
+	        <javadoc destdir="javadocs" classpathref="classpath" packagenames="*.*"
+	            author="true" private="true" version="true" windowtitle="Graphing Calculator Documentation">
+	            <packageset dir="src" />
+	        </javadoc>
+	</target>
+
+
+</project>
